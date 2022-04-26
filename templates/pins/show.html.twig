@@ -3,9 +3,9 @@
 {% block title pin.title %}
 
 {% block body %}
-    <a href="{{ path('app_home') }}">Home</a>
 	<article>
 		<h1>{{ pin.title }}</h1>
 		<p>{{pin.description}}</p>
 	</article>
+	<a href="{{ path('app_pin_edit', {id: pin.id}) }}">Edit</a>
 {% endblock %}
