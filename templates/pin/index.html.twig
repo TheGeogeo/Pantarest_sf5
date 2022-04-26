@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title "All best pins!" %}
+
+{% block body %}
+	<h1>{{pluralize(pins|length, 'Pin') }}</h1>
+	<main>
+		{% for pin in pins %}
+			<h2>
+				<a href="{{ path('app_pin_show', {'id': pin.id}) }}">{{ pin.title }}</a>
+			</h2>
+			<p>{{ pin.description }}</p>
+		{% endfor %}
+	</main>
+	<a href="{{ path('app_pin_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Edit ' ~ pin.title %}
+
+{% block body %}
+    <h1>Edit Pin</h1>
+
+    {{ include('pin/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_home') }}">back to list</a>
+
+    {{ include('pin/_delete_form.html.twig') }}
+{% endblock %}
