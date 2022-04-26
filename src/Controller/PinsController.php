@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pin;
+use App\Form\PinType;
 use App\Repository\PinRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -33,10 +34,7 @@ class PinsController extends AbstractController
     #[Route('/pins/create', name: 'app_pin_create')]
     public function create(Request $request, PinRepository $pinRepository): Response
     {
-        $form = $this->createFormBuilder(new Pin)
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->getForm();
+        $form = $this->createForm(PinType::class);
 
         $form->handleRequest($request);
 
@@ -52,14 +50,13 @@ class PinsController extends AbstractController
         ]);
     }
 
-    #[Route('/pins/{id<[0-9]+>}/edit}', name: 'app_pin_edit')]
+    #[Route('/pins/{id<[0-9]+>}/edit}', name: 'app_pin_edit', methods:['GET','PUT'])]
     public function update(Pin $pin, Request $request, PinRepository $pinRepository): Response
     {
 
-        $form = $this->createFormBuilder($pin)
-            ->add('title', TextType::class)
-            ->add('description', TextareaType::class)
-            ->getForm();
+        $form = $this->createForm(PinType::class, $pin, [
+            'method' => 'PUT'
+        ]);
 
         $form->handleRequest($request);
 
