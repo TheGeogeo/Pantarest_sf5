@@ -8,4 +8,5 @@
 		<p>{{pin.description}}</p>
 	</article>
 	<a href="{{ path('app_pin_edit', {id: pin.id}) }}">Edit</a>
+	<a href="{{ path('app_pin_delete', {id: pin.id}) }}" onclick="if(!confirm('Are you sure?')) event.preventDefault()" >Delete</a>
 {% endblock %}
