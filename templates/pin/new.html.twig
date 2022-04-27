@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new Pin</h1>
 
-    {{ include('pin/_form.html.twig') }}
+    {{ include('pin/_form.html.twig', {submitButtonText: 'Create pin'}) }}
 
     <a href="{{ path('app_home') }}">back to list</a>
 {% endblock %}

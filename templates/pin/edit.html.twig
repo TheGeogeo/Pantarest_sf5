@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Edit Pin</h1>
 
-    {{ include('pin/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('pin/_form.html.twig', {submitButtonText: 'Update pin'}) }}
 
     <a href="{{ path('app_home') }}">back to list</a>
 
