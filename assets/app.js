@@ -10,3 +10,4 @@ import './scss/Base.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import $ from 'jquery';
