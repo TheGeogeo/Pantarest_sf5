@@ -6,6 +6,8 @@ use App\Entity\Traits\Timestampable;
 use App\Repository\PinRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Mime\Message;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PinRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -19,9 +21,13 @@ class Pin
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: "Title can't be blank.")]
+    #[Assert\Length(min: 3, minMessage: "Title need minimun {{ limit }} caractere.", max: 255, maxMessage: "Title can't have more {{ limit }} caractere.")]
     private $title;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: "Description can't be blank.")]
+    #[Assert\Length(min: 10, minMessage: "Description need minimun {{ limit }} caractere.")]
     private $description;
 
     public function getId(): ?int
