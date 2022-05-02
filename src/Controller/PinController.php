@@ -30,7 +30,10 @@ class PinController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pinRepository->add($pin);
-            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+
+            $this->addFlash('success','Pin successfully created!');
+
+            return $this->redirectToRoute('app_pin_show', ['id' => $pin->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('pin/new.html.twig', [
@@ -55,6 +58,9 @@ class PinController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pinRepository->add($pin);
+
+            $this->addFlash('success','Pin successfully updated!');
+
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -69,6 +75,8 @@ class PinController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$pin->getId(), $request->request->get('_token'))) {
             $pinRepository->remove($pin);
+
+            $this->addFlash('info','Pin successfully deleted!');
         }
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
