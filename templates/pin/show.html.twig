@@ -7,8 +7,6 @@
 
     <p>{{ pin.description }}</p>
 
-    <a href="{{ path('app_home') }}">back to list</a>
-
     <a href="{{ path('app_pin_edit', {'id': pin.id}) }}">edit</a>
 
     {{ include('pin/_delete_form.html.twig') }}

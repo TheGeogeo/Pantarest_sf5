@@ -13,6 +13,9 @@
 					padding: 10px;
 					color: white;
 					text-align: center;
+					margin: 0;
+					border: none;
+					border-radius: 0;
 				}
 
 				.alert-success {
@@ -29,20 +32,20 @@
 			</style>
 		{% endblock %}
 
-		{% block javascripts %}
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-		{% endblock %}
 	</head>
 	<body>
 
-		{% include "partials/FlashMessage.html.twig" %}
+		{% include "partials/_FlashMessage.html.twig" %}
+		{% include "partials/_Nav.html.twig" %}
 
-		<nav>
-			<ul>
-				<li><a href="{{path('app_home')}}">HOME</a></li>
-				<li><a href="{{path('app_pin_new')}}">NEW PIN</a></li>
-			</ul>
-		</nav>
-		{% block body %}{% endblock %}
+		<main role="main" class="container">
+			{% block body %}{% endblock %}
+		</main>
+
+		{% include "partials/_Footer.html.twig" %}
+
+		{% block javascripts %}
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		{% endblock %}
 	</body>
 </html>
