@@ -26,5 +26,6 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
-###> Pins save ###
-imageSave/
+###> Custom ignore ###
+public/imageSave/pins
+###> Custom ignore ###
