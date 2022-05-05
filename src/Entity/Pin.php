@@ -30,6 +30,9 @@ class Pin
     #[Assert\Length(min: 10, minMessage: "Description need minimun {{ limit }} caractere.")]
     private $description;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $imageName;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,5 +71,17 @@ class Pin
             $this->setCreatedAt($date);
         }
         $this->setUpdatedAt($date);
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
     }
 }
