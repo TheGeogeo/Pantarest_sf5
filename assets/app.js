@@ -6,8 +6,13 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './scss/Base.scss';
+import "./scss/Base.scss";
 
 // start the Stimulus application
-import './bootstrap';
-//import $ from 'jquery';
+import "./bootstrap";
+import $ from "jquery";
+
+$(".custom-file-input").on("change", function (e) {
+  let inputFile = e.currentTarget;
+  document.getElementById("pin_title").value = inputFile.files[0].name;
+});
