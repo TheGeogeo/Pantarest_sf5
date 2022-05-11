@@ -26,7 +26,6 @@ class PinType extends AbstractType
 
         if (!$inEditMode) array_push($contraints, new NotNull(["message" => "Please upload a picture."]));
 
-
         $builder
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image (JPG or PNG file)',
@@ -37,6 +36,7 @@ class PinType extends AbstractType
                 'download_uri' => false,
                 'image_uri' => true,
                 'asset_helper' => true,
+                'imagine_pattern' => 'squared_thumbnail_small',
                 'constraints' => $contraints
             ])
             ->add('title')

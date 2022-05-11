@@ -29,3 +29,7 @@ yarn-error.log
 ###> Custom ignore ###
 public/imageSave/pins
 ###> Custom ignore ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
