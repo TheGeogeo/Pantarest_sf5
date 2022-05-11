@@ -14,5 +14,5 @@ import $ from "jquery";
 
 $(".custom-file-input").on("change", function (e) {
   let inputFile = e.currentTarget;
-  document.getElementById("pin_title").value = inputFile.files[0].name;
+  document.getElementById("pin_title").value = inputFile.files[0].name.split('.')[0];
 });
