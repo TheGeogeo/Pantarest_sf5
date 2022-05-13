@@ -3,11 +3,30 @@
 {% block title pin.title %}
 
 {% block body %}
-    <h1>{{ pin.title }}</h1>
-
-    <p>{{ pin.description }}</p>
-
-    <a href="{{ path('app_pin_edit', {'id': pin.id}) }}">edit</a>
-
-    {{ include('pin/_delete_form.html.twig') }}
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			<article class="pin bg-white rounded shadow">
+				<div class="mw-100 overflow-hidden">
+					<a href="{{ path('app_pin_show', {id: pin.id}) }}">
+						<img class="w-100 rounded-top" src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/img/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.title }}">
+					</a>
+				</div>
+				<h2 class="h5 ps-3 pt-3 text-muted">
+					<a href="{{ path('app_pin_show', {'id': pin.id}) }}">{{ pin.title }}</a>
+				</h2>
+				{# <p>{{ pin.description|u.truncate(10, '...', false) }}</p> #}
+				<p class="h5 ps-3 pt-3">{{ pin.description }}</p>
+				<p class="h5 ps-3 pt-3 pb-3">
+					<small>
+						Submitted
+						{{ pin.updatedAt|ago }}
+						by NAME_USER
+					</small>
+				</p>
+				<div class="pb-3 pe-3 ps-3 d-flex justify-content-around">
+					<a class="btn btn-primary col-12" href="{{ path('app_pin_edit', {'id': pin.id}) }}">edit</a>
+				</div>
+			</article>
+		</div>
+	</div>
 {% endblock %}
