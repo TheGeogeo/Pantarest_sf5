@@ -19,13 +19,17 @@
 										<img class="w-100 rounded-top" src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('img/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.title }}">
 									</a>
 								</div>
-								<h2>
+								<h2 class="h5 pt-3 text-muted">
 									<a href="{{ path('app_pin_show', {'id': pin.id}) }}">{{ pin.title }}</a>
 								</h2>
 								{# <p>{{ pin.description|u.truncate(10, '...', false) }}</p> #}
-								<p>Submitted
-									{{ pin.updatedAt|ago }}
-									by NAME_USER</p>
+								<p class="pb-3 text-muted">
+									<small>
+										Submitted
+										{{ pin.updatedAt|ago }}
+										by NAME_USER
+									</small>
+								</p>
 							</article>
 						</div>
 					{% endfor %}
