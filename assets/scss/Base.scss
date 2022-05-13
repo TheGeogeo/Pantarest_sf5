@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 @import "shared/_Variables";
 
@@ -30,15 +30,26 @@ body {
 }
 
 .vich-image {
-  .form-check{
+  .form-check {
     @extend .mt-3;
   }
 
-  img{
+  img {
     @extend .mb-2;
     @extend .mt-2;
     @extend .rounded;
     @extend .shadow;
     @extend .img-thumbnail;
+  }
+}
+.pin {
+  a {
+    text-decoration: none;
+  }
+  img {
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.075);
+    }
   }
 }
