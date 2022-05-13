@@ -19,7 +19,7 @@ class PinType extends AbstractType
 
         $contraints = [
             new Image([
-                "maxSize" => "8M",
+                "maxSize" => "2M",
                 "maxSizeMessage" => "The max size is '{{ limit }}' but your file is to weight '{{ size }}'.",
             ])
         ];
