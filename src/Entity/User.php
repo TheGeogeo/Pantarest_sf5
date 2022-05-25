@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\Timestampable;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +37,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     private $last_name;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Pin::class, orphanRemoval: true)]
+    private $pins;
+
+    public function __construct()
+    {
+        $this->pins = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -145,6 +155,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pin>
+     */
+    public function getPins(): Collection
+    {
+        return $this->pins;
+    }
+
+    public function addPin(Pin $pin): self
+    {
+        if (!$this->pins->contains($pin)) {
+            $this->pins[] = $pin;
+            $pin->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePin(Pin $pin): self
+    {
+        if ($this->pins->removeElement($pin)) {
+            // set the owning side to null (unless already changed)
+            if ($pin->getUser() === $this) {
+                $pin->setUser(null);
+            }
+        }
 
         return $this;
     }
