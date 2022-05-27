@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pin;
 use App\Form\PinType;
 use App\Repository\PinRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +22,8 @@ class PinController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_pin_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PinRepository $pinRepository): Response
+    #[Route('/pins/new', name: 'app_pin_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, PinRepository $pinRepository, UserRepository $userRepo): Response
     {
         $pin = new Pin();
         $form = $this->createForm(PinType::class, $pin);
@@ -42,7 +43,7 @@ class PinController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_pin_show', methods: ['GET'])]
+    #[Route('/pins/{id}', name: 'app_pin_show', methods: ['GET'])]
     public function show(Pin $pin): Response
     {
         return $this->render('pin/show.html.twig', [
@@ -50,7 +51,7 @@ class PinController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_pin_edit', methods: ['GET', 'POST'])]
+    #[Route('/pins/{id}/edit', name: 'app_pin_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Pin $pin, PinRepository $pinRepository): Response
     {
         $form = $this->createForm(PinType::class, $pin);
@@ -70,7 +71,7 @@ class PinController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_pin_delete', methods: ['POST'])]
+    #[Route('/pins/{id}', name: 'app_pin_delete', methods: ['POST'])]
     public function delete(Request $request, Pin $pin, PinRepository $pinRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$pin->getId(), $request->request->get('_token'))) {
