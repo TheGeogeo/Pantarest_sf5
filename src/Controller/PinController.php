@@ -26,6 +26,7 @@ class PinController extends AbstractController
     public function new(Request $request, PinRepository $pinRepository, UserRepository $userRepo): Response
     {
         if (!$this->getUser()) {
+            $this->addFlash('error','You are not logged!');
             return $this->redirectToRoute("app_home");
         }
 
@@ -59,6 +60,7 @@ class PinController extends AbstractController
     public function edit(Request $request, Pin $pin, PinRepository $pinRepository): Response
     {
         if (!$this->getUser()) {
+            $this->addFlash('error','You are not logged!');
             return $this->redirectToRoute("app_home");
         }
 
@@ -83,6 +85,7 @@ class PinController extends AbstractController
     public function delete(Request $request, Pin $pin, PinRepository $pinRepository): Response
     {
         if (!$this->getUser()) {
+            $this->addFlash('error','You are not logged!');
             return $this->redirectToRoute("app_home");
         }
 
