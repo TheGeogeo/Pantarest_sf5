@@ -25,6 +25,10 @@ class PinController extends AbstractController
     #[Route('/pins/new', name: 'app_pin_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PinRepository $pinRepository, UserRepository $userRepo): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute("app_home");
+        }
+
         $pin = new Pin();
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($request);
@@ -32,7 +36,7 @@ class PinController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $pinRepository->add($pin);
 
-            $this->addFlash('success','Pin successfully created!');
+            $this->addFlash('success', 'Pin successfully created!');
 
             return $this->redirectToRoute('app_pin_show', ['id' => $pin->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -54,13 +58,17 @@ class PinController extends AbstractController
     #[Route('/pins/{id}/edit', name: 'app_pin_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Pin $pin, PinRepository $pinRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute("app_home");
+        }
+
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pinRepository->add($pin);
 
-            $this->addFlash('success','Pin successfully updated!');
+            $this->addFlash('success', 'Pin successfully updated!');
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
@@ -74,10 +82,14 @@ class PinController extends AbstractController
     #[Route('/pins/{id}', name: 'app_pin_delete', methods: ['POST'])]
     public function delete(Request $request, Pin $pin, PinRepository $pinRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$pin->getId(), $request->request->get('_token'))) {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute("app_home");
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $pin->getId(), $request->request->get('_token'))) {
             $pinRepository->remove($pin);
 
-            $this->addFlash('info','Pin successfully deleted!');
+            $this->addFlash('info', 'Pin successfully deleted!');
         }
 
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
