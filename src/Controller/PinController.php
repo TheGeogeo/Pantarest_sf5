@@ -34,7 +34,9 @@ class PinController extends AbstractController
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($request);
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $pin->setUser($this->getUser());
             $pinRepository->add($pin);
 
             $this->addFlash('success', 'Pin successfully created!');
